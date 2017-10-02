@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 class Reader(object):
-    def __init__(self, batch_size):
+    def __init__(self):
         data = pd.read_csv('_data/wdbc.data', header=-1) # No header in the file
         y = np.array(data[1])
         y[y == 'M'] = 1
