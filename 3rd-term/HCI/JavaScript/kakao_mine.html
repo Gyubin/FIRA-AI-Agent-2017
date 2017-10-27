@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="kakao.css">
+    <title>Kakao Talk Layout</title>
+  </head>
+  <body>
+
+	<div id="chat_panel">
+
+		<div class="user_block">
+			<div class="user_thumbnail"></div>
+			<div class="chat_block_left">
+				<div class="user_id">보노보노</div>
+				<div><div class="chat_left">일단은 이 채팅방을 레이아웃만 짜고 2단계는 이 채팅방을 txt로 익스포트해서 그 스태틱한 페이지에 데이터를 넣는거 3단계는 채팅까지 되는거 이게 은근 짜증나는게 2줄 3줄 되면 네모가 두줄되고 하는게 빡침</div></div>
+				<div><div class="chat_left">보노보노의 쩌는 슬라이드에서는</div></div>
+				<div><div class="chat_left">옛날 카톡 기준으로 숙제 되어있었는데 요새는 플랫디자인이라 좀 쉬울듯</div></div>
+				<div><div class="chat_left">근데 보면 박스 아래 미세한 쉐도우같은것도 있고 여러모로 빡치는게 많음</div></div>
+      		</div>
+    	</div>
+
+		<div class="user_block">
+			<div class="chat_block_right">
+				<div><div class="chat_right">오 그렇구나...</div></div>
+				<div><div class="chat_right">그러면 브라우저 크기에 따라 달라져야돼? 사이즈 조절하면?</div></div>
+				<div><div class="chat_right">스크린샷 붙여넣고 다했다 할라했는데 실패다</div></div>
+			</div>
+		</div>
+
+		<div class="user_block">
+			<div class="user_thumbnail"></div>
+			<div class="chat_block_left">
+				<div class="user_id">보노보노</div>
+				<div><div class="chat_left">일단은 이 채팅방을 레이아웃만 짜고 2단계는 이 채팅방을 txt로 익스포트해서 그 스태틱한 페이지에 데이터를 넣는거 3단계는 채팅까지 되는거 이게 은근 짜증나는게 2줄 3줄 되면 네모가 두줄되고 하는게 빡침</div></div>
+				<div><div class="chat_left">보노보노의 쩌는 슬라이드에서는</div></div>
+				<div><div class="chat_left">옛날 카톡 기준으로 숙제 되어있었는데 요새는 플랫디자인이라 좀 쉬울듯</div></div>
+				<div><div class="chat_left">근데 보면 박스 아래 미세한 쉐도우같은것도 있고 여러모로 빡치는게 많음</div></div>
+      		</div>
+    	</div>
+
+		<div class="user_block">
+			<div class="chat_block_right">
+				<div><div class="chat_right">오 그렇구나...</div></div>
+				<div><div class="chat_right">그러면 브라우저 크기에 따라 달라져야돼? 사이즈 조절하면?</div></div>
+				<div><div class="chat_right">스크린샷 붙여넣고 다했다 할라했는데 실패다</div></div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="input_panel">
+		<div>
+			<button id="input_button" type="button" onclick="buttonClick()">Enter</button>
+			<div id="input_control_block">
+				<input id="input_control" type=text>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+		function buttonClick(){
+            const el = document.getElementById('input_control')
+            appendMyChat(el.value)
+            el.value = ''
+            el.focus()
+		}
+
+        const appendMyChat = (message) => {
+            const target = document.getElementById('chat_panel')
+
+            const userBlockDiv = document.createElement('div')
+            userBlockDiv.classList.add('user_block')
+
+            const chatBlockRightDiv = document.createElement('div')
+            chatBlockRightDiv.classList.add('chat_block_right')
+
+            const outerDiv = document.createElement('div')
+            const innerDiv = document.createElement('div')
+            innerDiv.classList.add('chat_right')
+            innerDiv.innerText = message
+
+            outerDiv.appendChild(innerDiv)
+            chatBlockRightDiv.appendChild(outerDiv)
+            userBlockDiv.appendChild(chatBlockRightDiv)
+            target.appendChild(userBlockDiv)
+        }
+
+        const appendOpponentChat = (message) => {
+            const target = document.getElementById('chat_panel')
+
+            const userBlockDiv = document.createElement('div')
+            userBlockDiv.classList.add('user_block')
+
+            const userThumbnailDiv = document.createElement('div')
+            userThumbnailDiv.classList.add('user_thumbnail')
+
+            const chatBlockLeftDiv = document.createElement('div')
+            chatBlockLeftDiv.classList.add('chat_block_left')
+
+            const userIdDiv = document.createElement('div')
+            userIdDiv.classList.add('user_id')
+            userIdDiv.innerHTML = '보노보노'
+
+            const outerDiv = document.createElement('div')
+            const innerDiv = document.createElement('div')
+            innerDiv.classList.add('chat_left')
+            innerDiv.innerText = message
+
+            outerDiv.appendChild(innerDiv)
+            chatBlockLeftDiv.appendChild(userIdDiv)
+            chatBlockLeftDiv.appendChild(outerDiv)
+            userBlockDiv.append(userThumbnailDiv)
+            userBlockDiv.append(chatBlockLeftDiv)
+
+            target.appendChild(userBlockDiv)
+        }
+
+        const intervalVar = setInterval(function () {
+          appendOpponentChat('왜 말 안해? ')
+        }, 3000)
+
+        setTimeout(function() {
+            clearInterval(intervalVar)
+        }, 10000)
+
+	</script>
+
+  </body>
+</html>

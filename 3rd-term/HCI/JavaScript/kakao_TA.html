@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="kakao.css">
+    <title>Kakao Talk Layout</title>
+  </head>	
+  <body>
+
+	<div id="chat_panel">
+		
+		<div class="user_block">
+			<div class="user_thumbnail"></div>
+			<div class="chat_block_left">
+				<div class="user_id">보노보노</div>
+				<div><div class="chat_left">일단은 이 채팅방을 레이아웃만 짜고 2단계는 이 채팅방을 txt로 익스포트해서 그 스태틱한 페이지에 데이터를 넣는거 3단계는 채팅까지 되는거 이게 은근 짜증나는게 2줄 3줄 되면 네모가 두줄되고 하는게 빡침</div></div>
+				<div><div class="chat_left">보노보노의 쩌는 슬라이드에서는</div></div>
+				<div><div class="chat_left">옛날 카톡 기준으로 숙제 되어있었는데 요새는 플랫디자인이라 좀 쉬울듯</div></div>
+				<div><div class="chat_left">근데 보면 박스 아래 미세한 쉐도우같은것도 있고 여러모로 빡치는게 많음</div></div>
+      </div> 
+    </div>
+    	
+		<div class="user_block">
+    	<div class="chat_block_right">
+				<div><div class="chat_right">오 그렇구나...</div></div>
+				<div><div class="chat_right">그러면 브라우저 크기에 따라 달라져야돼? 사이즈 조절하면?</div></div>
+				<div><div class="chat_right">스크린샷 붙여넣고 다했다 할라했는데 실패다</div></div>
+    	</div>
+		</div>
+			
+		<div class="user_block">
+			<div class="user_thumbnail"></div>
+			<div class="chat_block_left">
+				<div class="user_id">보노보노</div>
+				<div><div class="chat_left">일단은 이 채팅방을 레이아웃만 짜고 2단계는 이 채팅방을 txt로 익스포트해서 그 스태틱한 페이지에 데이터를 넣는거 3단계는 채팅까지 되는거 이게 은근 짜증나는게 2줄 3줄 되면 네모가 두줄되고 하는게 빡침</div></div>
+				<div><div class="chat_left">보노보노의 쩌는 슬라이드에서는</div></div>
+				<div><div class="chat_left">옛날 카톡 기준으로 숙제 되어있었는데 요새는 플랫디자인이라 좀 쉬울듯</div></div>
+				<div><div class="chat_left">근데 보면 박스 아래 미세한 쉐도우같은것도 있고 여러모로 빡치는게 많음</div></div>
+      </div> 
+    </div>
+			
+		<div class="user_block">
+    	<div class="chat_block_right">
+				<div><div class="chat_right">오 그렇구나...</div></div>
+				<div><div class="chat_right">그러면 브라우저 크기에 따라 달라져야돼? 사이즈 조절하면?</div></div>
+				<div><div class="chat_right">스크린샷 붙여넣고 다했다 할라했는데 실패다</div></div>
+    	</div>
+		</div>
+    	
+	</div>
+	
+	<div id="input_panel">
+		<div>
+			<button id="input_button" type="button" onclick="buttonClick()">Enter</button>
+			<div id="input_control_block">
+					<input id="input_control" type="text" onkeydown="onInputKeyDown()">
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+		var chat_contents = [
+			"일단은 이 채팅방을 레이아웃만 짜고 2단계는 이 채팅방을 txt로 익스포트해서 그 스태틱한 페이지에 데이터를 넣는거 3단계는 채팅까지 되는거 이게 은근 짜증나는게 2줄 3줄 되면 네모가 두줄되고 하는게 빡침",
+			"보노보노의 쩌는 슬라이드에서는",
+			"옛날 카톡 기준으로 숙제 되어있었는데 요새는 플랫디자인이라 좀 쉬울듯",
+			"근데 보면 박스 아래 미세한 쉐도우같은것도 있고 여러모로 빡치는게 많음"
+		];
+
+		var input_control = document.getElementById("input_control");
+		var isLastRight = true; // 제일 마지막 채팅의 방향. 우측 채팅인지 아닌지
+
+		function buttonClick(){
+			var str = input_control.value;
+			if (str.length !== 0) { // 아무것도 입력 되지 않았다면 화면에 띄우지 않음
+				enterInput(str, true);
+				// input_control 내용이 입력된 후에는
+				// input_control에 쓰여있는 것을 지워준다.
+				input_control.value = "";
+			}
+		}
+
+		function onInputKeyDown(){
+			if (window.event.keyCode == 13){ // Enter 키가 눌렸을 때
+				buttonClick(); // 버튼 클릭 이벤트 발생시키기
+			}
+		}
+
+		function createUserBlock(isRight){
+			
+			var user_block = document.createElement("DIV");
+			user_block.setAttribute("class", "user_block");
+
+			var chat_block, thumb, user_id;
+
+			if(isRight === true){ // 오른쪽 user_block을 만드는 경우
+
+				// chat_block 만들기
+				chat_block = document.createElement("DIV");
+				chat_block.setAttribute("class", "chat_block_right");
+
+				user_block.appendChild(chat_block);	// user_block 에다가 chat_block 붙이기
+
+			} else { // 왼쪽 user_block을 만드는 경우
+				
+				// thumbnail 만들어야 되고
+				// user_id (e.g. 보노보노) 부분도 만들어야 되서
+				// 오른쪽 user_block 만들기보다 조금 더 Step이 많다.
+
+				// thumbnail 만들기
+				thumb = document.createElement("DIV");
+				thumb.setAttribute("class", "user_thumbnail");
+
+				// chat_block 만들기
+				chat_block = document.createElement("DIV");
+				chat_block.setAttribute("class", "chat_block_left");
+
+				// user_id 만들기
+				user_id = document.createElement("DIV");
+				user_id.setAttribute("class", "user_id");
+				user_id.innerHTML = "보노보노";
+
+				chat_block.appendChild(user_id); 	// chat_block 에다가 user_id 붙이기
+				user_block.appendChild(thumb);		// user_block 에다가 thumbnail 붙이기
+				user_block.appendChild(chat_block);	// user_block 에다가 chat_block 붙이기
+			}
+
+			// chat_panel을 찾은 뒤, 지금 새로 만든 user_block을 이어붙여 준다.
+			document.getElementById("chat_panel").appendChild(user_block);
+			
+			return user_block;
+		}
+
+		function enterInput(str, isRight){
+			
+			var last_user_block; // 가장 마지막 user_block
+			var chat_block;
+
+			if(isLastRight !== isRight){ // 마지막 채팅과 현재 채팅의 주체가 다를 경우
+				last_user_block = createUserBlock(isRight); // 새로운 user_block을 만들어 준다.
+
+			} else {
+				var user_blocks = document.getElementsByClassName("user_block");
+				last_user_block = user_blocks[user_blocks.length - 1];
+			}
+
+			var child_elem = document.createElement("DIV"); // 실제 채팅내용 들어가는 div 요소 생성
+			var child_elem_wrapper = document.createElement("DIV"); // 한번 감싸주는 div 요소 생성
+
+			if(isRight === true){
+				child_elem.setAttribute("class", "chat_right");
+
+				// chat_block_left 를 가져온다
+				// chat_block_left는 user_block의 첫 번째 자식이므로 index 0
+				chat_block = last_user_block.children[0]; // chat_block_right 를 가져온다.
+
+			} else {
+				child_elem.setAttribute("class", "chat_left");
+				
+				// chat_block_left 를 가져온다
+				// left의 경우 user_block의 첫 자식이 thumbnail 이므로 두 번째 자식을 가져온다.
+				// 두 번째 자식 : index가 1
+				chat_block = last_user_block.children[1]; 
+			}
+
+			child_elem.innerHTML = str; // 채팅 내용 넣기
+			child_elem_wrapper.appendChild(child_elem); // 감싸주는 div에 child_elem 을 넣기
+			chat_block.appendChild(child_elem_wrapper); // 감싸주는 div를 chat_block에 넣기
+
+			// child_elem이 현재 화면에서 보이도록 scroll 해주는 함수
+			child_elem.scrollIntoView();
+
+			// 현재 입력된 방향 (오른쪽 or 왼쪽)이
+			// 새로운 제일 마지막 채팅 방향이 되므로 값 갱신
+			isLastRight = isRight;  
+		}
+
+		setInterval(function(){	
+
+			// chat_contents 배열에 있는 String들 중에 랜덤하게 하나를 뽑아서
+			// 보노보노가 입력하게 하려고 한다.
+			// Math.random() 함수와 Math.floor() 함수를 검색해서
+			// random_index를 어떻게 구할 수 있는지 알아보자.
+			var random_index = Math.floor(Math.random()* chat_contents.length);
+			var chat_str = chat_contents[random_index];
+
+			enterInput(chat_str, false); 
+
+		}, 7000); // 7초
+
+	</script>
+	
+  </body>	
+</html>
