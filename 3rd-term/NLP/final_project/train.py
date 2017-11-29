@@ -25,7 +25,7 @@ def train():
                 if os.path.exists(model_path):
                     model = Word2Vec.load(model_path)
                 else:
-                    model = Word2Vec(newspapers[index], size=size, window=5, min_count=5, workers=4, iter=iter)
+                    model = Word2Vec(newspapers[index], size=size, window=5, min_count=5, workers=4, iter=iter, sg=sg)
                     index += 1
 
                 while index < 5:
